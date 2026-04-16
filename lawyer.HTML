@@ -1,0 +1,924 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="zh-CN"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;LBTI · 律师行为类型测试&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>*, *::before, *::after {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0; padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>-webkit-tap-highlight-color: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--gold: #d4a843;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--gold-light: #f0c857;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--dark: #0d0d1a;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--dark2: #13132a;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--dark3: #1a1a35;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--text: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--text-dim: rgba(255,255,255,0.6);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--text-faint: rgba(255,255,255,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--border: rgba(255,255,255,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>--radius: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>html, body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overscroll-behavior: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--dark);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>-webkit-font-smoothing: antialiased;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>touch-action: manipulation;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>-webkit-touch-callout: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>/* ── SCREENS ── */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.screen {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inset: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inset: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.35s ease;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow-y: auto;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow-x: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>-webkit-overflow-scrolling: touch;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.screen.active {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opacity: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: all;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>/* ═══════════════════════════════</p>
+<p class="p1"><span class="Apple-converted-space">       </span>INTRO SCREEN</p>
+<p class="p1"><span class="Apple-converted-space">    </span>═══════════════════════════════ */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#s-intro {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,168,67,0.15) 0%, transparent 70%),</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>linear-gradient(180deg, #0d0d1a 0%, #13132a 100%);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 60px 28px 50px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.intro-badge {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: inline-block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(212,168,67,0.45);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 5px 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.intro-logo {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 86px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 900;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: -4px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 0.95;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 60%, var(--gold) 100%);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>-webkit-background-clip: text;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>-webkit-text-fill-color: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-clip: text;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.intro-full {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-faint);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 36px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.intro-tagline {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 17px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: rgba(255,255,255,0.88);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.5;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.intro-sub {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-dim);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.8;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 36px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 300px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.intro-stats {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 44px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.stat-pill {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.06);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(255,255,255,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 7px 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-dim);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 0.5px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-start {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, var(--gold), var(--gold-light));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #0d0d1a;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 17px 64px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 800;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 50px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: transform 0.15s, box-shadow 0.15s;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 8px 32px rgba(212,168,67,0.35);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 280px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-start:active { transform: scale(0.97); box-shadow: 0 4px 16px rgba(212,168,67,0.2); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.intro-note {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 22px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-faint);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>/* ═══════════════════════════════</p>
+<p class="p1"><span class="Apple-converted-space">       </span>QUIZ SCREEN</p>
+<p class="p1"><span class="Apple-converted-space">    </span>═══════════════════════════════ */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#s-quiz {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(180deg, #0d0d1a 0%, #13132a 100%);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.quiz-top {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 52px 24px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.quiz-progress-row {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.quiz-step {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-faint);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.quiz-count {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.progress-track {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.progress-bar {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(90deg, var(--gold), var(--gold-light));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: width 0.45s cubic-bezier(0.4,0,0.2,1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 0%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.quiz-body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 30px 24px 24px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.q-wrap {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.25s ease, transform 0.25s ease;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.q-wrap.out-left<span class="Apple-converted-space">  </span>{ opacity: 0; transform: translateX(-28px); }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.q-wrap.out-right { opacity: 0; transform: translateX(28px); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.q-num {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.q-text {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 21px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.55;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 34px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opts {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.04);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(255,255,255,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 16px 18px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: all 0.2s ease;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt:active { transform: scale(0.99); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt.selected {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(212,168,67,0.12);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt.dimmed {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0.35;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt-abc {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 28px; height: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(255,255,255,0.15);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.05);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: rgba(255,255,255,0.4);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: all 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt.selected .opt-abc {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #0d0d1a;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt-text {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: rgba(255,255,255,0.8);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding-top: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt.selected .opt-text {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>/* ═══════════════════════════════</p>
+<p class="p1"><span class="Apple-converted-space">       </span>RESULT SCREEN</p>
+<p class="p1"><span class="Apple-converted-space">    </span>═══════════════════════════════ */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#s-result {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #0d0d1a;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-hero {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 64px 28px 36px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-glow {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>top: -80px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 360px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 360px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>filter: blur(60px);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0.18;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: background 0.5s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-eyebrow {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-faint);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-code {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 82px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 900;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: -2px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: color 0.4s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-name {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 19px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: rgba(255,255,255,0.85);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-score-tag {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: inline-block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.07);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(255,255,255,0.12);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 4px 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-faint);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0 20px 60px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-card {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.04);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(255,255,255,0.09);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 22px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-card-top {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: background 0.4s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-card-inner {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 24px 22px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-desc {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14.5px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.95;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: rgba(255,255,255,0.8);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>white-space: pre-line;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-meta {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 22px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-meta-row {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-meta-key {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>white-space: nowrap;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding-top: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>min-width: 56px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-meta-val {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: rgba(255,255,255,0.6);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-share {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(212,168,67,0.07);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(212,168,67,0.22);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 22px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-share-icon { font-size: 26px; margin-bottom: 10px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-share-text {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: rgba(255,255,255,0.55);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.75;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-share-em {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--gold);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>/* WeChat share button */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-wechat-share {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, #07c160, #06ad56);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1.5px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-wechat-share:active { opacity: 0.85; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-restart {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.05);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(255,255,255,0.12);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: rgba(255,255,255,0.5);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: background 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-restart:active { background: rgba(255,255,255,0.1); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.res-footer {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 16px 0 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-faint);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>/* ── Loading flash ── */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.flash-overlay {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inset: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>z-index: 999;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.1s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.flash-overlay.on { opacity: 0.12; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- flash feedback --&gt;</p>
+<p class="p1">&lt;div class="flash-overlay" id="flash"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ══════ INTRO ══════ --&gt;</p>
+<p class="p1">&lt;div id="s-intro" class="screen active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="intro-badge"&gt;LBTI™ · 律师专版&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="intro-logo"&gt;LBTI&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="intro-full"&gt;Legal Behavioral Type Indicator&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="intro-tagline"&gt;比 SBTI 更懂你&lt;br&gt;比当事人更了解你的律师灵魂&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="intro-sub"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>不评判，不安慰。&lt;br&gt;只是把你看个透。</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="intro-stats"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="stat-pill"&gt;15 题&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="stat-pill"&gt;约 3 分钟&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="stat-pill"&gt;8 种类型&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="btn-start" onclick="startQuiz()"&gt;开始测试&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="intro-note"&gt;请根据真实状态作答 · 结果仅供娱乐&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ══════ QUIZ ══════ --&gt;</p>
+<p class="p1">&lt;div id="s-quiz" class="screen"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="quiz-top"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="quiz-progress-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="quiz-step"&gt;LBTI™&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="quiz-count" id="q-count"&gt;1 / 15&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="progress-track"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="progress-bar" id="prog-bar"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="quiz-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="q-wrap" id="q-wrap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q-num" id="q-num"&gt;Q.01&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="q-text" id="q-text"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="opts" id="opts"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- ══════ RESULT ══════ --&gt;</p>
+<p class="p1">&lt;div id="s-result" class="screen"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="res-hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-glow" id="res-glow"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-eyebrow"&gt;你的律师类型&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-code" id="res-code"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-name" id="res-name"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-score-tag" id="res-score-tag"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="res-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-card" id="res-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="res-card-top" id="res-card-top"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="res-card-inner"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="res-desc" id="res-desc"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="res-meta" id="res-meta"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-share"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="res-share-icon"&gt;📸&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="res-share-text"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="res-share-em"&gt;长按截图&lt;/span&gt;，发给最近一起熬夜改合同的人&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>看看 TA 测出来是什么</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="btn-wechat-share" onclick="wechatShare()"&gt;📤 分享给同事 · 看 TA 是哪种律师&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="btn-restart" onclick="restartQuiz()"&gt;重新测一次&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-footer"&gt;LBTI™ · 仅供娱乐 · 如有雷同纯属必然&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">/* ═══════════════════════════════════════════</p>
+<p class="p1"><span class="Apple-converted-space">   </span>DATA</p>
+<p class="p1">═══════════════════════════════════════════ */</p>
+<p class="p2"><br></p>
+<p class="p1">// fwd: true → A=1,B=2,C=3<span class="Apple-converted-space">  </span>|<span class="Apple-converted-space">  </span>fwd: false → A=3,B=2,C=1</p>
+<p class="p1">const QUESTIONS = [</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "收到新案件委托，你的第一反应是什么？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["先看看能不能推掉", "先看看案件本身有没有意思、有没有胜算", "先在脑子里估算一下这个案子大概能计多少小时"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "周六上午十点，客户发来消息：「律师，有个紧急的事想聊一下」，你：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["回：好的，明天工作日联系", "回：好的，稍后电话（内心稍微皱了一下眉）", "直接打过去"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "你认为一份合同「写完了」意味着：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["意味着写完了", "意味着你看了一遍", "意味着逐字逐句过了至少三遍，并且跟对面确认过一遍"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "法院通知开庭日期，你的内心活动是：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["又要开庭，想想就累", "正常，准备准备就好了", "终于！"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "你最近一次凌晨 12 点后还在工作，是：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["很久以前了，或者已经不记得了", "上周", "昨晚（或者三天内）"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "你觉得做律师最大的成就感来自：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["成就感？什么成就感……", "拿到律师费的那一刻", "帮客户解决了一个真实的问题，或者赢了一个该赢的案子"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "对方律师在庭上突然提出了一个你没预料到的论点，你：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["有点慌，说实话", "稳住了，但心里打鼓", "反而更清醒，脑子转得更快了"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "你平时对案件结果的态度是：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["赢多少算多少，我尽力就好", "每个案子我都想赢，但有时候现实不允许", "我会在接案前就做筛选，只接有把握或有意义的"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "打开手机，你现在有多少条还没回的客户消息：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["0 条，全部已回", "几条，但都不急", "不知道，我不太敢看"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "你有没有认真想过自己未来 3—5 年的职业方向？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["不只想过，还列过规划，也在按规划走", "有模糊的想法，但没有认真梳理过", "想的更多是「五年后还在不在这行」"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "你对律师这个职业的感情，用一句话形容是：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["爱恨交织，但我依然选它", "就这样吧，算是凑合", "当初要是没来这行就好了"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: false</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "面对一份 300 页的合同或尽职调查报告，你：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["分配给团队，但我会亲自过每一个关键细节", "我和助理各分一部分，我盯重点", "挑框架和关键条款，太细的部分信任助理判断"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: false</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "你对自己法律分析能力的评价是：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["很强，这是我最自信的部分", "还行，和同行比差不多", "我更靠经验和直觉，不太喜欢抠理论"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: false</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "你主动开发客户（BD）的频率：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["经常，这是我工作的重要组成部分", "偶尔，有机会就做", "基本没有，不擅长，也不太想做"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: false</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q: "如果明天突然离开律师行业，你最不舍得的是：",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opts: ["这套工作本身——庭审的感觉，或者啃复杂问题时的状态", "团队、同事、这些年建立起来的关系", "工资和社会认可度"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fwd: false</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">];</p>
+<p class="p2"><br></p>
+<p class="p1">const TYPES = [</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min: 15, max: 22,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>code: "DEAD",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: "已阵亡律师",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: "#7e9db5",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc: `你还在。\n但你的灵魂不确定还在不在。\n\n你盯着屏幕改合同，改着改着忘了自己在改什么。客户发来消息你看了，「稍后回复」变成「等我明天再说」，变成「他会再催的」。你不是不在乎，你是已经在乎不动了。\n\n深夜你有时会在电脑前发呆，不是在思考什么，只是虚空。\n\n你来这行的理由，已经有点模糊了。某个大案子赢了的那一刹那，觉得还行——但那种感觉越来越短，间隔越来越长。\n\n你不是一个坏律师。你只是一个累透了的律师。\n\n有时候你觉得应该休一段时间。\n然后你打开邮箱，发现有十七封新邮件。`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>action: "发完邮件后盯着空白文档发呆两分钟",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>word: "「好的，我看一下」（然后放着了）",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wish: "一个没有手机的周末"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min: 23, max: 27,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>code: "POOR",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: "入错了行",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: "#b07d62",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc: `你不是不努力，你是在努力地怀疑自己的选择。\n\n当初读法学的理由，你现在想想有点模糊——电视剧？父母觉得稳定？还是自己也没想清楚？反正你来了，你考过了，你入行了。\n\n但现在，你每天看着账单、看着案件、看着同事背条文的样子，感觉自己好像少了什么东西——一种热情？还是一种确信？\n\n你完成工作，不犯大错，对客户也算尽职。但在这一切做完之后，你偶尔会想：要是当初去做别的会怎样？\n\n你不是能力不够。\n你只是不确定这是不是你真正想要的。\n\n这个问题，律所的 KPI 表里没有答案。`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>action: "在法院门口等候时刷招聘软件",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>word: "「算了，先干着吧」",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wish: "有一天能弄清楚自己到底想要什么"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min: 28, max: 32,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>code: "MONK",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: "苦行僧律师",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: "#7986cb",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc: `你没有抱怨，但不是因为你很快乐。\n你只是相信：熬过去就好了。\n\n别人加班到 11 点，你加班到凌晨 1 点。别人说这个案子做不完，你做完了。别人说这个客户太难缠，你还是接了，还给做完了。你用执行力解决了一切问题，但你很少问自己：我为什么要解决这些问题？\n\n你身边的人觉得你很靠谱。实习生和助理知道找你准没错。你经常被人说「你真的太拼了」，你点头，微笑，然后打开邮箱，发现有新邮件进来了。\n\n你不是没有情绪，只是把情绪放到很后面了——后面还有一份合同等着改。\n\n某种意义上，你是这行的脊梁。某种意义上，你也在把自己消耗得有点快。`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>action: "在最崩溃的时候，打开电脑继续干",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>word: "「没事，我来」",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wish: "有一天可以不用这么拼（但说完自己也不信）"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min: 33, max: 36,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>code: "CITE",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: "引法狂魔",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: "#4db6ac",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc: `你不只是记得法条，你是用法条来思考的。\n\n别人说「这不合理」，你已经在脑子里出现了「根据《民法典》第 X 条第 X 款……」。朋友圈看到新闻，你会自动分析法律适用。和客户吃饭，你会用合同履行来类比烹饪方式，并为此感到一丝奇怪的满足。\n\n你是一个真正喜欢法律逻辑本身的律师——这行里，这种人其实不多。\n\n你有时会觉得其他律师「太功利了」，但你不说出来，你知道每个人有自己的活法。你也偶尔对自己的迂腐感到一丝无奈：有些客户只想要结果，不想听你讲法理。\n\n改变不了，这就是你。\n一个在法律世界里真正有信仰的人。`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>action: "聊天途中突然说「根据最高院去年的指导意见……」",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>word: "「从法律逻辑来看……」",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wish: "所有人都尊重程序正义（包括你的客户）"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min: 37, max: 39,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>code: "BILL",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: "计费驱动型",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: "#ffb74d",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc: `时间就是金钱——这不是一句话，这是你的操作系统。\n\n你等电梯时会想：这算不算 billable。给客户发一封邮件前会算一下这封邮件值多少钱。手机里装着好几个计时工具。有人约你「随便吃个饭聊聊」，你听到「随便」两个字，心里已经在估算时间成本了。\n\n你不是唯利是图。你只是非常清醒地知道：你的价值是用时间体现的，而时间是有限的，所以你不能让时间随便溜走。\n\n你的账单很干净，记录很详细。客户偶尔抱怨费用，你翻出时间表，他们就没话说了。\n\n这种清醒有时让你很累——但你停不下来。停下来的每一分钟都是在亏钱。`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>action: "在手机上记录今天的 billable hours，晚上对账",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>word: "「这个我需要计费时间的」",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wish: "每一个小时都能找到对应的计费依据"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min: 40, max: 42,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>code: "FIRE",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: "庭审战神",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: "#ef6c6c",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc: `你为庭审而生。\n\n写合同？可以，但提不起劲。开会讨论？无聊，但得去。但是——开庭。\n\n走进那个法庭，站在那个位置，你会变成另一个人。思维变清晰，语言变犀利，那种专注的状态是你在其他任何地方都找不到的。对方律师越强，你越亢奋。\n\n你喜欢对抗，不是因为你好斗，而是因为你相信这套对抗制度是检验真相最好的方式。\n\n有人开玩笑说你天生适合打架，你笑笑，没解释。\n他们不懂。\n\n你懂的是：在这个法庭上，没有什么是不能通过论点和证据改变的。`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>action: "庭前 5 分钟反而最平静，进去就是另一个状态",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>word: "「再确认一遍证据链，我们还差一个环节」",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wish: "遇到一个足够复杂的大案子"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min: 43, max: 44,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>code: "CTRL",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: "掌控者",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: "#66bb6a",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc: `你不只是做律师，你在管理律师这件事本身。\n\n不是指管理别人（当然你也在管），而是说：这个过程的每一个细节——合同条款、时间节点、风险预案、备选方案——都在你的控制里。\n\n你不喜欢失控。你会提前两周准备截止日期前两天就该完成的工作。你的邮件有时回复得太快，让对方以为你时刻在等他们。\n\n你知道自己有时候有点「累人」——累到别人，也累到自己。但你停不下来，因为一看到有漏洞、有混乱、有没跟进到的细节，你就会不舒服。\n\n在别人眼里，你是那种「有什么事找他/她准没错」的律师。\n在你自己眼里，你只是在做正常应该做的事情，其他人不知道怎么了。`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>action: "建一个复杂的项目管理表，每天更新，顺便催所有人",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>word: "「这个我来跟进一下」",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wish: "所有人都能按照你认为正确的方式工作"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min: 45, max: 45,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>code: "BOSS",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: "合伙人胚子",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: "#d4a843",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>desc: `你怎么会在这里看这种测试？\n\n你应该在开会，或者正好在开会间隙顺手刷了一下。\n\n你分不清自己什么时候在工作、什么时候不在，因为你一直都在——但你不觉得痛苦，这种状态对你来说本来就是动力来源的一部分。\n\n你有想法，你有执行力，你有人格魅力（尽管你可能没意识到），你还有一种奇怪的能力：让事情发生。\n\n不是所有事情都会成功，但你的故事里，成功的概率明显比别人高。你知道这一点，但很少说出来，因为还有更多的事情要做。\n\n这行给你的不只是职业。\n这行是你选择的战场。`,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>action: "开会中途突然有了新思路，会后直接落地",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>word: "「我们能不能从另一个角度想这件事」",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wish: "没有——你在做的，就是你想做的"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">];</p>
+<p class="p2"><br></p>
+<p class="p1">// Hidden type</p>
+<p class="p1">const TRAP_TYPE = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>code: "TRAP",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>name: "被骗进来的律师",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>color: "#ce93d8",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>desc: `当初你以为律师是——正义化身、高薪光鲜、一口流利的法庭陈词、电视剧里那种。\n\n现在你坐在办公室里，周围是改不完的合同、催不完的当事人，以及一个对你说「你当初要好好想清楚」的自己。\n\n你不是没有能力，你只是当初没有想那么清楚。\n这不是你的错，是法学院宣传 PPT 的错。\n\n但你现在还在，所以也许你找到了一些在这里继续下去的理由——哪怕是一点点。\n\n你比自己想象的，要更有韧性。`,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>action: "看到师兄师姐的发展路径时，暗暗和自己对比",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>word: "「当时怎么就选了这行呢……」",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wish: "回到高考填志愿那一天"</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">/* ═══════════════════════════════════════════</p>
+<p class="p1"><span class="Apple-converted-space">   </span>STATE</p>
+<p class="p1">═══════════════════════════════════════════ */</p>
+<p class="p1">let currentQ = 0;</p>
+<p class="p1">let answers<span class="Apple-converted-space">  </span>= [];<span class="Apple-converted-space">  </span>// stores option index (0,1,2)</p>
+<p class="p2"><br></p>
+<p class="p1">/* ═══════════════════════════════════════════</p>
+<p class="p1"><span class="Apple-converted-space">   </span>NAVIGATION</p>
+<p class="p1">═══════════════════════════════════════════ */</p>
+<p class="p1">function showScreen(id) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.screen').forEach(s =&gt; s.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const el = document.getElementById(id);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>el.classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>el.scrollTop = 0;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function startQuiz() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>currentQ = 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>answers<span class="Apple-converted-space">  </span>= [];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>showScreen('s-quiz');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderQuestion(0);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function restartQuiz() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>showScreen('s-intro');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ═══════════════════════════════════════════</p>
+<p class="p1"><span class="Apple-converted-space">   </span>QUIZ LOGIC</p>
+<p class="p1">═══════════════════════════════════════════ */</p>
+<p class="p1">function renderQuestion(idx) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const q = QUESTIONS[idx];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const total = QUESTIONS.length;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Progress</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('q-count').textContent = `${idx + 1} / ${total}`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('prog-bar').style.width = `${((idx) / total) * 100}%`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('q-num').textContent = `Q.${String(idx + 1).padStart(2, '0')}`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('q-text').textContent = q.q;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Options</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const labels = ['A', 'B', 'C'];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const optsEl = document.getElementById('opts');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>optsEl.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>q.opts.forEach((txt, i) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const btn = document.createElement('button');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>btn.className = 'opt';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>btn.innerHTML = `&lt;span class="opt-abc"&gt;${labels[i]}&lt;/span&gt;&lt;span class="opt-text"&gt;${txt}&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>btn.onclick = () =&gt; selectOption(i);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>optsEl.appendChild(btn);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function selectOption(optIdx) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const opts = document.querySelectorAll('.opt');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>opts.forEach((b, i) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>b.classList.toggle('selected', i === optIdx);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>b.classList.toggle('dimmed', i !== optIdx);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>b.onclick = null; // prevent double tap</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// flash feedback</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const flash = document.getElementById('flash');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>flash.classList.add('on');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(() =&gt; flash.classList.remove('on'), 80);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>answers[currentQ] = optIdx;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (currentQ &lt; QUESTIONS.length - 1) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const wrap = document.getElementById('q-wrap');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>wrap.classList.add('out-left');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>currentQ++;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderQuestion(currentQ);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>wrap.classList.remove('out-left');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>wrap.style.opacity = '0';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>wrap.style.transform = 'translateX(20px)';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>wrap.style.transition = 'opacity 0.25s ease, transform 0.25s ease';</p>
+<p class="p1"><span class="Apple-converted-space">          </span>wrap.style.opacity = '1';</p>
+<p class="p1"><span class="Apple-converted-space">          </span>wrap.style.transform = 'translateX(0)';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}, 20);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}, 220);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Last question</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setTimeout(showResult, 300);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, 420);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ═══════════════════════════════════════════</p>
+<p class="p1"><span class="Apple-converted-space">   </span>SCORING &amp; RESULT</p>
+<p class="p1">═══════════════════════════════════════════ */</p>
+<p class="p1">function calcScore() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let total = 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>QUESTIONS.forEach((q, i) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const opt = answers[i] ?? 1; // default mid</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const pts = q.fwd ? (opt + 1) : (3 - opt);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>total += pts;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return total;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function getType(score) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Hidden TRAP: Q11 = C (idx 2) AND Q1 = A (idx 0)</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (answers[10] === 2 &amp;&amp; answers[0] === 0) return TRAP_TYPE;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>for (const t of TYPES) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (score &gt;= t.min &amp;&amp; score &lt;= t.max) return t;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return TYPES[TYPES.length - 1];</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ═══════════════════════════════════════════</p>
+<p class="p1"><span class="Apple-converted-space">   </span>WECHAT SHARE</p>
+<p class="p1">═══════════════════════════════════════════ */</p>
+<p class="p1">function wechatShare() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// In WeChat browser, trigger native share menu</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (navigator.share) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>navigator.share({</p>
+<p class="p1"><span class="Apple-converted-space">      </span>title: 'LBTI · 律师行为类型测试',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text: '15道题，测出你的律师人格类型。不评判，不安慰，只是把你看个透。',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>url: window.location.href</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}).catch(() =&gt; {});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Fallback: hint user to use WeChat share</p>
+<p class="p1"><span class="Apple-converted-space">    </span>alert('点击右上角 ··· 分享给朋友或发到朋友圈');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function showResult() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const score = calcScore();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const type<span class="Apple-converted-space">  </span>= getType(score);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('res-code').textContent = type.code;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('res-code').style.color = type.color;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('res-name').textContent = type.name;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('res-score-tag').textContent = `得分 ${score} · LBTI™`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('res-glow').style.background = type.color;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('res-card-top').style.background = `linear-gradient(90deg, ${type.color}, transparent)`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('res-desc').textContent = type.desc;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Meta rows</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const metaEl = document.getElementById('res-meta');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>metaEl.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-meta-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="res-meta-key"&gt;代表动作&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="res-meta-val"&gt;${type.action}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-meta-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="res-meta-key"&gt;常说的话&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="res-meta-val"&gt;${type.word}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="res-meta-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="res-meta-key"&gt;最大心愿&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="res-meta-val"&gt;${type.wish}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Final progress fill</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('prog-bar').style.width = '100%';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>showScreen('s-result');</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
